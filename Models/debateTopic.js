@@ -1,31 +1,59 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const DebateTopicSchema = new mongoose.Schema({
-    topicName: {
-        type: String,
-        required: true
-    },
-    team: {
-        type: String,
-        enum: ['Red', 'Blue'],
-        required: true
-    },
-    leaderName: {
-        type: String,
-        required: true
+const DebateTopicSchema = new mongoose.Schema(
+  {
+    debateName: {
+      type: String,
+      required: true,
     },
     status: {
-        type: String,
-        enum: ['Ongoing', 'Completed'],
-        required: true
+      type: String,
+      enum: ["Ongoing", "Completed", "Upcoming"],
+      required: true,
     },
-    userId: {
+    description: {
+      type: String,
+      required: true,
+    },
+    conclusion: {
+      type: String,
+      default: "",
+    },
+    redTeam: {
+      TeamLeaderId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
-    }
-}, {
-    timestamps: true
-});
+        ref: "User",
+      },
+      TeamMembers: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "User",
+        },
+      ],
+    },
+    blueTeam: {
+      TeamLeaderId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true,
+      },
 
-module.exports = mongoose.model('DebateTopic', DebateTopicSchema);
+      TeamMembers: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "User",
+        },
+      ],
+    },
+    winner: {
+      type: String,
+      enum: ["Ongoing", "Completed", "Upcoming"],
+      required: false,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
+
+module.exports = mongoose.model("DebateTopic", DebateTopicSchema);
