@@ -51,35 +51,35 @@ app.listen(PORT, (err) => {
   }
 });
 
-// Socket.IO
-const io = new Server(ser, {
-  cors: {
-    origin: "*", // Allow all origins
-  },
-});
+// // Socket.IO
+// const io = new Server(ser, {
+//   cors: {
+//     origin: "*", // Allow all origins
+//   },
+// });
 
-io.on("connection", (socket) => {
-  console.log("A user connected:", socket.id);
+// io.on("connection", (socket) => {
+//   console.log("A user connected:", socket.id);
 
-  socket.on("setup", (userId) => {
-    socket.join(userId);
-    socket.emit("connected", userId);
-    console.log("User connected to socket:", userId);
-  });
+//   socket.on("setup", (userId) => {
+//     socket.join(userId);
+//     socket.emit("connected", userId);
+//     console.log("User connected to socket:", userId);
+//   });
 
-  socket.on("joinroom", (room) => {
-    socket.join(room);
-    console.log("User joined room:", room);
-  });
+//   socket.on("joinroom", (room) => {
+//     socket.join(room);
+//     console.log("User joined room:", room);
+//   });
 
-  // Listening for messages
-  socket.on("message", (data) => {
-    console.log("Message received:", data);
-    io.emit("message", data); // Broadcast to all clients
-  });
+//   // Listening for messages
+//   socket.on("message", (data) => {
+//     console.log("Message received:", data);
+//     io.emit("message", data); // Broadcast to all clients
+//   });
 
-  // Handle disconnection
-  socket.on("disconnect", () => {
-    console.log("A user disconnected:", socket.id);
-  });
-});
+//   // Handle disconnection
+//   socket.on("disconnect", () => {
+//     console.log("A user disconnected:", socket.id);
+//   });
+// });
