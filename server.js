@@ -43,21 +43,13 @@ app.get("/", (req, res) => {
 });
 
 // Start server
-// const ser = server.listen(PORT, (err) => {
-//   if (err) {
-//     console.error("Server failed to start:", err);
-//   } else {
-//     console.log(`Server started on port ${PORT}`);
-//   }
-// });
-
-server.listen(PORT, (err) => {
-  //   if (err) {
-  //     console.error("Server failed to start:", err);
-  //   } else {
-  //     console.log(`Server started on port ${PORT}`);
-  //   }
-  // });
+app.listen(PORT, (err) => {
+  if (err) {
+    console.error("Server failed to start:", err);
+  } else {
+    console.log(`Server started on port ${PORT}`);
+  }
+});
 
 // // Socket.IO
 // const io = new Server(ser, {
